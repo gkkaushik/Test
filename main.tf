@@ -17,7 +17,7 @@ data "google_compute_network" "network" {
 }
 
 data "google_compute_network" "sub-network" {
-  name    = var.network
+  name    = var.subnetwork
   project = var.project_id
 }
 
@@ -63,7 +63,6 @@ ip_allocation_policy {
       }
 }
 resource "google_container_node_pool" "primary_node_pool" {
-  provider           = google-beta # spot vm only available on beta
   name               = var.primary_node_pool_name
   location           = var.region
   initial_node_count = var.initial_node_count
@@ -120,7 +119,7 @@ resource "google_container_node_pool" "secondary_node_pool" {
   project            = var.project_id
   max_pods_per_node  = XXX
   
-  network_config {
+network_config {
     pod_range = var.secondary_pod_ip_range_name
   }
 
@@ -164,3 +163,5 @@ resource "google_container_node_pool" "secondary_node_pool" {
     google_container_cluster.gke_cluster
   ]
 }
+
+
