@@ -61,6 +61,16 @@ ip_allocation_policy {
     enable_private_nodes    = true # All GKE nodes will be private and no public ips
     enable_private_endpoint = true # GKE master ip will be complete private
       }
+    master_authorized_networks_config = [
+    {
+      cidr_blocks = [
+        {
+          cidr_block   = var.cidr_block
+          display_name = var.display_name
+        },
+      ]
+    },
+  ]
 }
 resource "google_container_node_pool" "primary_node_pool" {
   name               = var.primary_node_pool_name
