@@ -89,7 +89,7 @@ resource "google_container_node_pool" "primary_node_pool" {
     image_type        = var.image_type
     machine_type      = var.primary_nodepool_machine_type
     oauth_scopes      = var.node_pool_oauth_scopes
-   
+   service_account = var.service_account_email
    labels = {
       "purpose" : "xyz" 
     }
@@ -103,7 +103,7 @@ resource "google_container_node_pool" "primary_node_pool" {
       enable_integrity_monitoring = true # GKE controls
     }
  
-      service_account = var.service_account_email
+      
  
 
   depends_on = [
